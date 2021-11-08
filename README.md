@@ -1,6 +1,6 @@
 # DynaWebScrape
 
-The DynaWebScrape can download the HTML files of a given websites list and their corresponding resource files (images, CSS and javascript). You can open those websites locally using your browser.  
+The DynaWebScrape can download the html, images, css and javascript files of dynamic websites. You can open those websites locally using your browser.  
 It is adapted from my previous [WebsitesSaver](https://github.com/epigone707/WebsitesSaver). The new thing is that I'm using selenium in this script to load dynamic content.
 # Setup
 * Requires Google Chrome
