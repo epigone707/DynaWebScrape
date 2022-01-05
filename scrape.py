@@ -145,15 +145,19 @@ def savePage(url, pagefilename='page'):
 
     # Set the location of the webdriver
     chrome_driver = "/usr/bin/chromedriver"
-    try:
-        # Instantiate a webdriver
-        service = webdriver.chrome.service.Service(chrome_driver)
-        driver = webdriver.Chrome(service=service, options=options)
-    except WebDriverException as e:
-        print("Error initalizing driver:\n", e)
+    # try:
+    #     # Instantiate a webdriver
+    #     service = webdriver.chrome.service.Service(chrome_driver)
+    #     driver = webdriver.Chrome(service=service, options=options)
+    # except WebDriverException as e:
+    #     print("Error initalizing driver:\n", e)
 
+    service = webdriver.chrome.service.Service(chrome_driver)
+    driver = webdriver.Chrome(service=service, options=options)
+    print("Intialize the driver.")
     # load a HTML page (can be dynamic)
     driver.get(url)
+    print("Loads the web page.")
 
     # Parse processed webpage with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, features="html.parser")
