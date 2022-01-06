@@ -9,7 +9,7 @@ $ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 $ sudo apt -y install ./google-chrome-stable_current_amd64.deb
 $ google-chrome --version
 ```
-* Requires Chromedriver, find your Chromedriver version in [here](https://chromedriver.chromium.org/downloads), copy the url and run:
+* Requires Chromedriver. I use the [tutorial for wsl](https://www.gregbrisebois.com/posts/chromedriver-in-wsl2/). Find your Chromedriver version in [here](https://chromedriver.chromium.org/downloads), copy the url and run:
 ```
 # replace the url after wget
 $ wget https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
