@@ -12,27 +12,43 @@ import datetime
 import argparse
 import re
 
+
 def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
     """saves on specified `pagefolder` all tag2find objects"""
+    
+    # count for files that doesn't has a filename
+    count = 0
+
     if not os.path.exists(pagefolder):
         os.mkdir(pagefolder)
     for res in soup.findAll(tag2find):  # images, css, etc..
         try:
-            if not res.has_attr(
-                    inner):  # check if inner tag (file object) exists
-                continue  # may or may not exist
+            if not res.has_attr(inner):
+                # if inner tag (file object) doesn't exists
+                continue
+            # if tag2find=='link' and res.get('rel') != "stylesheet":
+            #     continue
             # print("===================")
             # print(f"res: {res}")
             inner_attribute = res[inner]
-            # print(f"inner_attribute: {inner_attribute}")
+            print(f"\ninner_attribute: {inner_attribute}")
             filename = os.path.basename(inner_attribute)
-            # print(f"basename: {filename}")
-            if not filename:
-                continue
+            print(f"basename: {filename}")
             filename = filename.split('?')[0]
-            # print(f"filename:　{filename}")
+            if not filename:
+                print("Error: if not filename")
+                continue
+            if str(filename) == "":
+                filename = f"renamed-{tag2find}-{count}"
+                count = count + 1
+            else:
+                filename = f"file-{tag2find}-{count}-{str(filename)}"
+                count = count + 1
+            print(f"filename: {filename}")
             fileurl = urljoin(url, res.get(inner))
+            print(f"fileurl: {fileurl}")
             filepath = os.path.join(pagefolder, filename)
+            print(f"filepath: {filepath}")
             # rename html ref so can move html and folder of files anywhere
             res[inner] = os.path.join(os.path.basename(pagefolder), filename)
             if not os.path.isfile(filepath):  # was not downloaded
@@ -60,7 +76,15 @@ def updateLink(soup, url, session):
             if not res.has_attr('href'):
                 continue
             # print("===================")
-            # res['href'] = url[:-1]+res['href']
+            res['href'] = updateSingleLink(url, res['href'])
+            # print(f"{res['href']}")
+        except Exception as exc:
+            print("updateLink(): ", exc, file=sys.stderr)
+    for res in soup.findAll('link'):
+        try:
+            if not res.has_attr('href'):
+                continue
+            # print("===================")
             res['href'] = updateSingleLink(url, res['href'])
             # print(f"{res['href']}")
         except Exception as exc:
@@ -145,21 +169,17 @@ def savePage(url, pagefilename='page'):
 
     # Set the location of the webdriver
     chrome_driver = "/usr/bin/chromedriver"
-    # try:
-    #     # Instantiate a webdriver
-    #     service = webdriver.chrome.service.Service(chrome_driver)
-    #     driver = webdriver.Chrome(service=service, options=options)
-    # except WebDriverException as e:
-    #     print("Error initalizing driver:\n", e)
 
     service = webdriver.chrome.service.Service(chrome_driver)
     driver = webdriver.Chrome(service=service, options=options)
     print("Intialize the driver.")
+
     # load a HTML page (can be dynamic)
     driver.get(url)
     print("Loads the web page.")
 
     # Parse processed webpage with BeautifulSoup
+    # print(driver.page_source)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
 
     # session used for downloading resource files like images, js and css
@@ -167,7 +187,21 @@ def savePage(url, pagefilename='page'):
 
     if not os.path.exists(pagefilename):
         os.mkdir(pagefilename)
-    pagefolder = pagefilename + '/' + pagefilename + '_files'
+    pagefolder = pagefilename + '/' + 'files'
+
+    # if <base> tag exists, need to update the url
+    basetag =  soup.find('base')
+    if basetag:
+        print("find a base tag:", basetag)
+        if basetag.has_attr("href"):
+            baseurl = basetag["href"]
+            print("find a baseurl:", baseurl)
+            url = urljoin(url, baseurl)
+            basetag["href"]="."
+    print("url: ", url)
+    
+
+
     soup = saveFileInTag(soup,
                          pagefolder,
                          url,

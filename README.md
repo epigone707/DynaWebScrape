@@ -39,3 +39,6 @@ Save the websites of all urls in the file <code>testlinks.txt</code>
 ```
 $ python scrape.py -l testlinks.txt
 ```
+
+# Reference
+- https://stackoverflow.com/a/62207356/17381104
