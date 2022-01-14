@@ -1,0 +1,220 @@
+.flake-r, .flake-l{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.flake-r{
+    background-position: right;
+}
+.flake-l{
+    background-position: left;
+}
+.year{
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    right: 15%;
+    top: 0;
+}
+.mc-container{
+	margin-top: -10px;
+	margin-bottom: -10px;
+	background-size: 50%;
+	background-position-x: center;
+	background-position-y: center;
+	background-repeat: no-repeat;
+}
+.hny, .year1{
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.christmas-hat{
+	position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 0;
+	margin-top: -34px;
+    margin-right: -20px;
+    right: 0;
+    z-index: 10;
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(-25deg);
+}
+.christmas-gift{
+	position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+	margin-top: -32px;
+    left: 0;
+    z-index: 10;
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(-15deg);
+}
+.christmas-gift.claim{
+    width: 50px;
+    height: 50px;
+    margin-top: -32px;
+    margin-left: -12px;
+}
+.christmas-hat.claim{
+	width: 40px;
+    height: 40px;
+    margin-top: -18px;
+    margin-right: -20px;
+}
+.christmas-hat-profile{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	margin-top: -18px;
+}
+.hny{
+	background-position-x: right;
+}
+.banner-chr{
+	background-size: contain;
+	margin-top: -20px;
+	margin-bottom: -20px;
+	background-repeat: no-repeat;
+}
+.banner-chr.cl{
+	background-repeat: space;
+	background-size: inherit;
+}
+.banner-chr.cl .cart{
+	display: none;
+}
+.mctx{
+	height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.fireworks{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+.logo-container.ny{
+	margin: auto
+}
+.header-container.ny{
+	background-position: center!important;
+	background-size: cover!important;
+}
+@media only screen and (max-width: 1050px){
+	.banner-chr{
+		background-size: 90%;
+	}
+	.banner-chr.cl{
+		background-size: 30%;
+		background-repeat-y: no-repeat;
+	}
+}
+@media only screen and (max-width: 992px){
+	.logo-container{
+		margin: auto;
+		margin-top: -15px;
+	}
+	.mc-container{
+		height: 50px;
+		margin-left: 1px!important;
+	}
+}
+
+@media only screen and (max-width: 800px){
+	.banner-chr{
+		background-size: 80%;
+		background-position-x: 40%;
+	}
+	.mc-container {
+		background-position-y: -5px;
+	}
+	.row-hny{
+		height: 60px;
+	}
+	.hny, .year1{
+		background-size: 75%;
+	}
+	.banner-chr{
+		background-position-x: right;
+	}
+}
+@media only screen and (max-width: 750px){
+	.logo-container.ny{
+		margin-left: 0!important;
+	}
+	.header-container{
+		background-position: right!important;
+	}
+	.cart{
+		display: none;
+	}
+}
+@media only screen and (max-width: 576px){
+	.logo-container{
+		text-align: center;
+	}
+	.logo{
+		max-height: 35px!important;
+	}
+	.header-container{
+		background-size: 35%!important;
+	}
+	.christmas-hat{
+		width: 40px;
+		height: 40px;
+		margin-top: -20px;
+   		margin-right: -10px;
+	}
+	.hny, .year1{
+		background-size: contain;
+	}
+	.row-hny{
+		margin-top: 5px!important;
+	}
+	.banner-chr{
+		margin: 0!important;
+		height: 60px;
+		background-position-x: center;
+		background-size: 100%;
+	}
+	.mc-container{
+		background-size: 50%;
+    	background-position-y: -10px;
+	}
+}
+@media only screen and (max-width: 500px){
+	.logo-container.ny{
+		text-align: left
+	}
+	.banner-chr{
+		height: 50px;
+	}
+	#content1{
+		padding-top: 10px!important;
+	}
+	.intro-product-name{
+		margin-bottom: 20px!important;
+	}
+	.intro-text{
+		margin-bottom: 5px!important;
+	}
+	.year{
+		background-position: right;
+		background-size: 70%;
+		right: 5%;
+	}
+}
+@media only screen and (max-width: 375px){
+	.header-container{
+		background-size: 30%!important;
+	}
+}
+@media only screen and (max-width: 320px){
+	.logo {
+		max-width: 180px!important;
+	}
+}

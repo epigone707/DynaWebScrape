@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <Description>Search PyPI</Description>
+    <Image height="16" width="16" type="image/icon">https://pypi.org/static/images/favicon.6a76275d.ico</Image>
+    <InputEncoding>UTF-8</InputEncoding>
+    <OutputEncoding>UTF-8</OutputEncoding>
+    <ShortName>PyPI</ShortName>
+    <Url type="text/html" method="GET" template="https://pypi.org/search/?q={searchTerms}"/>
+</OpenSearchDescription>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>PyPI newest packages</title>
+    <link>https://pypi.org/</link>
+    <description>Newest packages registered at the Python Package Index</description>
+    <language>en</language>
+    <item>
+      <title>trilogy added to PyPI</title>
+      <link>https://pypi.org/project/trilogy/</link>
+      <guid>https://pypi.org/project/trilogy/</guid>
+      <description>Python script that converts astronomical FITS images in color/grayscale images.</description>
+      <author>dcoe@stsci.edu</author>
+      <pubDate>Fri, 14 Jan 2022 04:28:16 GMT</pubDate>
+    </item>
+    <item>
+      <title>pycounts-s120496 added to PyPI</title>
+      <link>https://pypi.org/project/pycounts-s120496/</link>
+      <guid>https://pypi.org/project/pycounts-s120496/</guid>
+      <description>Calculate word counts in a text file!</description>
+      
+      <pubDate>Fri, 14 Jan 2022 04:26:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>jaye added to PyPI</title>
+      <link>https://pypi.org/project/jaye/</link>
+      <guid>https://pypi.org/project/jaye/</guid>
+      <description>jaye에서 생산한 퀀트 데이터를 제공하는 패키지입니다.</description>
+      <author>help@jayecorp.com</author>
+      <pubDate>Fri, 14 Jan 2022 04:14:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>wordler added to PyPI</title>
+      <link>https://pypi.org/project/wordler/</link>
+      <guid>https://pypi.org/project/wordler/</guid>
+      <description>solves the wordle word puzzle</description>
+      <author>viktormartin95@hotmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 04:13:40 GMT</pubDate>
+    </item>
+    <item>
+      <title>odoo14-addons-oca-project-agile added to PyPI</title>
+      <link>https://pypi.org/project/odoo14-addons-oca-project-agile/</link>
+      <guid>https://pypi.org/project/odoo14-addons-oca-project-agile/</guid>
+      <description>Meta package for oca-project-agile Odoo addons</description>
+      
+      <pubDate>Fri, 14 Jan 2022 04:13:32 GMT</pubDate>
+    </item>
+    <item>
+      <title>nipistaa added to PyPI</title>
+      <link>https://pypi.org/project/nipistaa/</link>
+      <guid>https://pypi.org/project/nipistaa/</guid>
+      <description>The all in one lib to bootstrap your pincer bot</description>
+      <author>contact@yohannboniface.dev</author>
+      <pubDate>Fri, 14 Jan 2022 03:53:57 GMT</pubDate>
+    </item>
+    <item>
+      <title>paralleller added to PyPI</title>
+      <link>https://pypi.org/project/paralleller/</link>
+      <guid>https://pypi.org/project/paralleller/</guid>
+      <description>a interface used to parallel processing pools.</description>
+      <author>rontomai@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 03:28:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>authortools added to PyPI</title>
+      <link>https://pypi.org/project/authortools/</link>
+      <guid>https://pypi.org/project/authortools/</guid>
+      <description>A collection of useful functions for writers to analyze text/stories.</description>
+      <author>codenameaidan@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 03:27:46 GMT</pubDate>
+    </item>
+    <item>
+      <title>balerin added to PyPI</title>
+      <link>https://pypi.org/project/balerin/</link>
+      <guid>https://pypi.org/project/balerin/</guid>
+      <description>A python package startup orchestrator. it can handle loading all packages of an application at startup time respecting package dependencies.</description>
+      <author>mohamadnobakht@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 03:25:20 GMT</pubDate>
+    </item>
+    <item>
+      <title>riverwm-utils added to PyPI</title>
+      <link>https://pypi.org/project/riverwm-utils/</link>
+      <guid>https://pypi.org/project/riverwm-utils/</guid>
+      <description>Utilities for the River Wayland compositor</description>
+      <author>nicholaschastings@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 03:21:39 GMT</pubDate>
+    </item>
+    <item>
+      <title>fivpy added to PyPI</title>
+      <link>https://pypi.org/project/fivpy/</link>
+      <guid>https://pypi.org/project/fivpy/</guid>
+      <description>A package for calculating forest inventories in python.</description>
+      
+      <pubDate>Fri, 14 Jan 2022 03:19:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>chogame added to PyPI</title>
+      <link>https://pypi.org/project/chogame/</link>
+      <guid>https://pypi.org/project/chogame/</guid>
+      <description>A module for creating choice based games.</description>
+      <author>Eren0078@outlook.com</author>
+      <pubDate>Fri, 14 Jan 2022 03:11:06 GMT</pubDate>
+    </item>
+    <item>
+      <title>laza-common added to PyPI</title>
+      <link>https://pypi.org/project/laza-common/</link>
+      <guid>https://pypi.org/project/laza-common/</guid>
+      <description>A python development toolkit</description>
+      
+      <pubDate>Fri, 14 Jan 2022 02:59:52 GMT</pubDate>
+    </item>
+    <item>
+      <title>makit added to PyPI</title>
+      <link>https://pypi.org/project/makit/</link>
+      <guid>https://pypi.org/project/makit/</guid>
+      <description>提供一些实用的工具类和方法</description>
+      <author>Kevinleong1011@hotmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 02:58:21 GMT</pubDate>
+    </item>
+    <item>
+      <title>uncertainty_toolbox added to PyPI</title>
+      <link>https://pypi.org/project/uncertainty-toolbox/</link>
+      <guid>https://pypi.org/project/uncertainty-toolbox/</guid>
+      <description>A python toolbox for predictive uncertainty quantification, calibration, metrics, and visualization.</description>
+      <author>willie.neiswanger@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 02:50:34 GMT</pubDate>
+    </item>
+    <item>
+      <title>pycounts-khpchan added to PyPI</title>
+      <link>https://pypi.org/project/pycounts-khpchan/</link>
+      <guid>https://pypi.org/project/pycounts-khpchan/</guid>
+      <description>Calculate word counts in a text file!</description>
+      
+      <pubDate>Fri, 14 Jan 2022 02:48:45 GMT</pubDate>
+    </item>
+    <item>
+      <title>masterful-gui-dev added to PyPI</title>
+      <link>https://pypi.org/project/masterful-gui-dev/</link>
+      <guid>https://pypi.org/project/masterful-gui-dev/</guid>
+      <description>Masterful AutoML Platform GUI.</description>
+      <author>help@masterfulai.com</author>
+      <pubDate>Fri, 14 Jan 2022 02:29:15 GMT</pubDate>
+    </item>
+    <item>
+      <title>bioconverters added to PyPI</title>
+      <link>https://pypi.org/project/bioconverters/</link>
+      <guid>https://pypi.org/project/bioconverters/</guid>
+      <description>Convert between NCBI pubmed/PMC and BIOC formats</description>
+      <author>jlever@stanford.edu</author>
+      <pubDate>Fri, 14 Jan 2022 02:25:20 GMT</pubDate>
+    </item>
+    <item>
+      <title>seqwho added to PyPI</title>
+      <link>https://pypi.org/project/seqwho/</link>
+      <guid>https://pypi.org/project/seqwho/</guid>
+      <description>Rapid and accurate classification of FASTQ(A) sequence files</description>
+      <author>christopher.bennett@dshelix.net</author>
+      <pubDate>Fri, 14 Jan 2022 02:05:52 GMT</pubDate>
+    </item>
+    <item>
+      <title>terraform-version added to PyPI</title>
+      <link>https://pypi.org/project/terraform-version/</link>
+      <guid>https://pypi.org/project/terraform-version/</guid>
+      <description>Package for tracking existing Terraform versions</description>
+      <author>Joshua.Wycuff@turner.com</author>
+      <pubDate>Fri, 14 Jan 2022 01:36:58 GMT</pubDate>
+    </item>
+    <item>
+      <title>npview added to PyPI</title>
+      <link>https://pypi.org/project/npview/</link>
+      <guid>https://pypi.org/project/npview/</guid>
+      <description>CLI utility for previewing .npy files</description>
+      <author>arian@jamasb.io</author>
+      <pubDate>Fri, 14 Jan 2022 01:30:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>discord-lumberjack added to PyPI</title>
+      <link>https://pypi.org/project/discord-lumberjack/</link>
+      <guid>https://pypi.org/project/discord-lumberjack/</guid>
+      <description>A Python logging handler which sends its logs to a Discord Channel</description>
+      <author>abrahammurciano@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 01:25:38 GMT</pubDate>
+    </item>
+    <item>
+      <title>cv-aid added to PyPI</title>
+      <link>https://pypi.org/project/cv-aid/</link>
+      <guid>https://pypi.org/project/cv-aid/</guid>
+      <description>CV Aid is a set of helpers for computer vision tasks.</description>
+      <author>accnew820@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 01:18:25 GMT</pubDate>
+    </item>
+    <item>
+      <title>tabdance added to PyPI</title>
+      <link>https://pypi.org/project/tabdance/</link>
+      <guid>https://pypi.org/project/tabdance/</guid>
+      <description>Table Data Syncer</description>
+      <author>insu@linewalks.com</author>
+      <pubDate>Fri, 14 Jan 2022 01:08:21 GMT</pubDate>
+    </item>
+    <item>
+      <title>deriva-chisel added to PyPI</title>
+      <link>https://pypi.org/project/deriva-chisel/</link>
+      <guid>https://pypi.org/project/deriva-chisel/</guid>
+      <description>CHiSEL: schema evolution and model management for the DERIVA platform.</description>
+      <author>isrd-support@isi.edu</author>
+      <pubDate>Fri, 14 Jan 2022 00:59:09 GMT</pubDate>
+    </item>
+    <item>
+      <title>m63 added to PyPI</title>
+      <link>https://pypi.org/project/m63/</link>
+      <guid>https://pypi.org/project/m63/</guid>
+      <description>m63</description>
+      <author>jihonight@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 00:53:33 GMT</pubDate>
+    </item>
+    <item>
+      <title>dramatiq-mongodb added to PyPI</title>
+      <link>https://pypi.org/project/dramatiq-mongodb/</link>
+      <guid>https://pypi.org/project/dramatiq-mongodb/</guid>
+      <description>Dramatiq-Mongodb Broker and Results Backend for Dramatiq</description>
+      <author>ToryClasen@Gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 00:52:26 GMT</pubDate>
+    </item>
+    <item>
+      <title>ffprb added to PyPI</title>
+      <link>https://pypi.org/project/ffprb/</link>
+      <guid>https://pypi.org/project/ffprb/</guid>
+      <description>A progress bar for ffmpeg. Yay !</description>
+      <author>r2fscg@gmail.com</author>
+      <pubDate>Fri, 14 Jan 2022 00:21:35 GMT</pubDate>
+    </item>
+    <item>
+      <title>linkml-owl added to PyPI</title>
+      <link>https://pypi.org/project/linkml-owl/</link>
+      <guid>https://pypi.org/project/linkml-owl/</guid>
+      <description>OWL mappings for Linked Open Data Modeling Language</description>
+      <author>cjmungall@lbl.gov</author>
+      <pubDate>Fri, 14 Jan 2022 00:16:17 GMT</pubDate>
+    </item>
+    <item>
+      <title>MooCoderPy-rjmatthews62 added to PyPI</title>
+      <link>https://pypi.org/project/moocoderpy-rjmatthews62/</link>
+      <guid>https://pypi.org/project/moocoderpy-rjmatthews62/</guid>
+      <description>Coding IDE/Client for LambdaMOO style servers</description>
+      <author>robbie@mithril.com.au</author>
+      <pubDate>Fri, 14 Jan 2022 00:07:43 GMT</pubDate>
+    </item>
+    <item>
+      <title>unicorn-binance-trailing-stop-loss-engine added to PyPI</title>
+      <link>https://pypi.org/project/unicorn-binance-trailing-stop-loss-engine/</link>
+      <guid>https://pypi.org/project/unicorn-binance-trailing-stop-loss-engine/</guid>
+      <description></description>
+      <author>info@lucit.tech</author>
+      <pubDate>Thu, 13 Jan 2022 23:47:21 GMT</pubDate>
+    </item>
+    <item>
+      <title>python-trovo added to PyPI</title>
+      <link>https://pypi.org/project/python-trovo/</link>
+      <guid>https://pypi.org/project/python-trovo/</guid>
+      <description>A Python wrapper for the Trovo API</description>
+      <author>liquid.query960@4wrd.cc</author>
+      <pubDate>Thu, 13 Jan 2022 23:18:03 GMT</pubDate>
+    </item>
+    <item>
+      <title>Spi2040 added to PyPI</title>
+      <link>https://pypi.org/project/spi2040/</link>
+      <guid>https://pypi.org/project/spi2040/</guid>
+      <description>RP2040 Modified SPI Library</description>
+      <author>Tylerb4427@gmail.com</author>
+      <pubDate>Thu, 13 Jan 2022 23:17:49 GMT</pubDate>
+    </item>
+    <item>
+      <title>wordle-api added to PyPI</title>
+      <link>https://pypi.org/project/wordle-api/</link>
+      <guid>https://pypi.org/project/wordle-api/</guid>
+      <description></description>
+      
+      <pubDate>Thu, 13 Jan 2022 23:08:53 GMT</pubDate>
+    </item>
+    <item>
+      <title>odoo14-addon-product-category-type added to PyPI</title>
+      <link>https://pypi.org/project/odoo14-addon-product-category-type/</link>
+      <guid>https://pypi.org/project/odoo14-addon-product-category-type/</guid>
+      <description>Add Type field on Product Categories to distinguish between parent and final categories</description>
+      <author>support@odoo-community.org</author>
+      <pubDate>Thu, 13 Jan 2022 22:55:01 GMT</pubDate>
+    </item>
+    <item>
+      <title>deep-b-spline-approximation added to PyPI</title>
+      <link>https://pypi.org/project/deep-b-spline-approximation/</link>
+      <guid>https://pypi.org/project/deep-b-spline-approximation/</guid>
+      <description>A python package for bspline curve approximation using deep learning</description>
+      <author>tommy.cecca@gmail.com</author>
+      <pubDate>Thu, 13 Jan 2022 22:52:30 GMT</pubDate>
+    </item>
+    <item>
+      <title>BaSiCpy added to PyPI</title>
+      <link>https://pypi.org/project/basicpy/</link>
+      <guid>https://pypi.org/project/basicpy/</guid>
+      <description></description>
+      <author>tingying.peng@helmholtz-muenchen.de, Lorenz.lamm@helmholtz-muenchen.de</author>
+      <pubDate>Thu, 13 Jan 2022 22:35:03 GMT</pubDate>
+    </item>
+    <item>
+      <title>nnk added to PyPI</title>
+      <link>https://pypi.org/project/nnk/</link>
+      <guid>https://pypi.org/project/nnk/</guid>
+      <description>Tools for counting &#34;NNK&#34; variants from a yeast display library and downstream analysis</description>
+      
+      <pubDate>Thu, 13 Jan 2022 22:34:54 GMT</pubDate>
+    </item>
+    <item>
+      <title>orionapi added to PyPI</title>
+      <link>https://pypi.org/project/orionapi/</link>
+      <guid>https://pypi.org/project/orionapi/</guid>
+      <description>A python interface for the Orion Advisors platform web API</description>
+      <author>67068943+spencerogden-dsam@users.noreply.github.com</author>
+      <pubDate>Thu, 13 Jan 2022 22:08:12 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

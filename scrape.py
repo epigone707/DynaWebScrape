@@ -10,12 +10,13 @@ import cssutils
 import logging
 import datetime
 import argparse
+import validators
 import re
 
 
 def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
     """saves on specified `pagefolder` all tag2find objects"""
-    
+
     # count for files that doesn't has a filename
     count = 0
 
@@ -33,7 +34,7 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
             inner_attribute = res[inner]
             print(f"\ninner_attribute: {inner_attribute}")
             filename = os.path.basename(inner_attribute)
-            print(f"basename: {filename}")
+            # print(f"basename: {filename}")
             filename = filename.split('?')[0]
             if not filename:
                 print("Error: if not filename")
@@ -44,16 +45,22 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
             else:
                 filename = f"file-{tag2find}-{count}-{str(filename)}"
                 count = count + 1
-            print(f"filename: {filename}")
+            # print(f"filename: {filename}")
             fileurl = urljoin(url, res.get(inner))
             print(f"fileurl: {fileurl}")
             filepath = os.path.join(pagefolder, filename)
             print(f"filepath: {filepath}")
             # rename html ref so can move html and folder of files anywhere
             res[inner] = os.path.join(os.path.basename(pagefolder), filename)
+
+            header = {
+                'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0'
+            }
+
             if not os.path.isfile(filepath):  # was not downloaded
                 with open(filepath, 'wb') as file:
-                    filebin = session.get(fileurl)
+                    filebin = session.get(fileurl, headers=header)
                     file.write(filebin.content)
         except Exception as exc:
             print("soupfindnSave(): filename: ",
@@ -156,23 +163,12 @@ def addAnnotation(soup, url):
     return soup
 
 
-def savePage(url, pagefilename='page'):
+def savePage(url, driver, dir_path='pagefolder'):
     """
     save the page
     """
     print("===================")
-    print(f"savePage({url}) start.")
-
-    # Instantiate options
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-
-    # Set the location of the webdriver
-    chrome_driver = "/usr/bin/chromedriver"
-
-    service = webdriver.chrome.service.Service(chrome_driver)
-    driver = webdriver.Chrome(service=service, options=options)
-    print("Intialize the driver.")
+    print(f"savePage(url={url},dir_path={dir_path}) start.")
 
     # load a HTML page (can be dynamic)
     driver.get(url)
@@ -185,49 +181,90 @@ def savePage(url, pagefilename='page'):
     # session used for downloading resource files like images, js and css
     session = requests.Session()
 
-    if not os.path.exists(pagefilename):
-        os.mkdir(pagefilename)
-    pagefolder = pagefilename + '/' + 'files'
+    plaintext_url = re.sub(r'[^a-zA-Z0-9]', '', url)
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+    assets_path = dir_path + '/' + plaintext_url + '_assets'
 
     # if <base> tag exists, need to update the url
-    basetag =  soup.find('base')
+    basetag = soup.find('base')
     if basetag:
         print("find a base tag:", basetag)
         if basetag.has_attr("href"):
             baseurl = basetag["href"]
             print("find a baseurl:", baseurl)
             url = urljoin(url, baseurl)
-            basetag["href"]="."
+            basetag["href"] = "."
     print("url: ", url)
-    
-
 
     soup = saveFileInTag(soup,
-                         pagefolder,
+                         assets_path,
                          url,
                          session,
                          tag2find='img',
                          inner='src')
     soup = saveFileInTag(soup,
-                         pagefolder,
+                         assets_path,
                          url,
                          session,
                          tag2find='link',
                          inner='href')
     soup = saveFileInTag(soup,
-                         pagefolder,
+                         assets_path,
                          url,
                          session,
                          tag2find='script',
                          inner='src')
-    soup = saveFileInStyle(soup, pagefolder, url, session)
+    soup = saveFileInStyle(soup, assets_path, url, session)
     soup = updateLink(soup, url, session)
     soup = addAnnotation(soup, url)
-    with open(pagefilename + '/' + pagefilename + '.html', 'wb') as file:
+    html_path = dir_path + '/' + re.sub(r'[^a-zA-Z0-9]', '', url) + '.html'
+    with open(html_path, 'wb') as file:
         file.write(soup.prettify('utf-8'))
     print(f"savePage({url}) finish.")
     print("===================")
     return soup
+
+
+def BFS_get_neighbors(soup):
+    """
+    Return the neighbors of the input page
+    """
+    # a list of urls that are the neighbors of the input page
+    neighbors = []
+    for link in soup.findAll('a'):
+        tmpurl = link.get('href')
+        if tmpurl is None:
+            break 
+        # print("tmpurl",tmpurl)
+        if validators.url(tmpurl):
+            neighbors.append(tmpurl)
+    print("BFS_get_neighbors: ",neighbors)
+    return neighbors
+
+
+def BFS(rooturl, driver, dir_path='page', limit=10):
+    # List to keep track of visited nodes. We don't want to download duplicate pages.
+    visited_urls = []
+    # BFS queue
+    queue_urls = []
+    visited_urls.append(rooturl)
+    queue_urls.append(rooturl)
+    # count for the number of downloaded pages
+    count = 0
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+    
+    while len(queue_urls) > 0 and count < limit:
+        node = queue_urls.pop(0)
+        print("node: ", node)
+        node_soup = savePage(node, driver, dir_path=dir_path)
+        count = count + 1
+        for neighbour in BFS_get_neighbors(node_soup):
+            if neighbour not in visited_urls:
+                visited_urls.append(neighbour)
+                queue_urls.append(neighbour)
+    print(f"BFS ends. Total number of downloaded web pages: {count} ")
 
 
 def main():
@@ -237,21 +274,42 @@ def main():
     # Adding optional argument
     parser.add_argument("-u", "--url", help="target url")
     parser.add_argument("-l", "--urllist", help="target urls list")
+    parser.add_argument(
+        "-b",
+        "--bfs",
+        type=int,
+        help=
+        "download pages that the root page links to using BFS. The attribute is the limit number of downloaded pages."
+    )
     # Read arguments from command line
     args = parser.parse_args()
     outputPath = []
     targetUrls = []
+    # Instantiate options
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+
+    service = webdriver.chrome.service.Service("/usr/bin/chromedriver")
+    driver = webdriver.Chrome(service=service, options=options)
+    print("Intialize the driver.")
+
     if args.url:
         targetUrls.append(args.url)
         outputPath.append(re.sub(r'[^a-zA-Z0-9]', '', args.url))
-    if args.urllist:
+    elif args.urllist:
+        # open the urls file
         url_file = open(args.urllist, "r")
         targetUrls = url_file.read().splitlines()
         for targetUrl in targetUrls:
             print(targetUrl)
             outputPath.append(re.sub(r'[^a-zA-Z0-9]', '', targetUrl))
-    for idx, url in enumerate(targetUrls):
-        savePage(url, outputPath[idx])
+    if args.bfs:
+        for idx, url in enumerate(targetUrls):
+            BFS(url, driver, outputPath[idx], limit=args.bfs)
+    else:
+        for idx, url in enumerate(targetUrls):
+            savePage(url, driver, dir_path=outputPath[idx])
+    driver.quit()
 
 
 if __name__ == '__main__':
