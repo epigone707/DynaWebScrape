@@ -5,6 +5,7 @@ import os
 import sys
 import requests
 from urllib.parse import urljoin
+from urllib.parse import unquote
 from bs4 import BeautifulSoup, Comment
 import cssutils
 import logging
@@ -20,6 +21,13 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
     # count for files that doesn't has a filename
     count = 0
 
+    # store the url of all downloaded files, so that we won't download duplicate files
+    # key = url, value = filename
+    downloaded_src={}
+
+    downloaded_filename=[]
+
+
     if not os.path.exists(pagefolder):
         os.mkdir(pagefolder)
     for res in soup.findAll(tag2find):  # images, css, etc..
@@ -29,39 +37,58 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
                 continue
             # if tag2find=='link' and res.get('rel') != "stylesheet":
             #     continue
-            # print("===================")
-            # print(f"res: {res}")
             inner_attribute = res[inner]
-            print(f"\ninner_attribute: {inner_attribute}")
-            filename = os.path.basename(inner_attribute)
-            # print(f"basename: {filename}")
+            print("\ntag: ", res)
+            
+            filename = os.path.basename(unquote(inner_attribute))
             filename = filename.split('?')[0]
+            print("filename: ", filename)
             if not filename:
-                print("Error: if not filename")
                 continue
             if str(filename) == "":
                 filename = f"renamed-{tag2find}-{count}"
                 count = count + 1
             else:
-                filename = f"file-{tag2find}-{count}-{str(filename)}"
-                count = count + 1
-            # print(f"filename: {filename}")
+                filename = f"{str(filename)}"
+            print("filename: ", filename)
             fileurl = urljoin(url, res.get(inner))
-            print(f"fileurl: {fileurl}")
-            filepath = os.path.join(pagefolder, filename)
-            print(f"filepath: {filepath}")
-            # rename html ref so can move html and folder of files anywhere
+            print("fileurl: ", fileurl)
+
+            
+            if fileurl in downloaded_src:
+                # if this file has been download, don't download it again
+                # update the tag src to let it point to the downloaded file
+                filename = downloaded_src[fileurl]
+            else:
+                # else: this file url hasn't been visited, download it
+                header = {
+                    'User-Agent':
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0'
+                }
+                filename_counter = 2
+                # for example, if we have downloaded file/icon.png as icon.png, 
+                # and now need to download image/icon.png
+                # we need to rename it as icon(2).png
+                while filename in downloaded_filename:
+                    filename = filename + "(" + str(filename_counter) + ")" 
+                    filename_counter += 1
+                filepath = os.path.join(pagefolder, filename)
+                # if the file has not been downloaded, download it
+                if not os.path.isfile(filepath):  
+                    print(f"Download file:")
+                    print(f"filename: {filename}")
+                    print(f"fileurl: {fileurl}")
+                    print(f"filepath: {filepath}")
+                    with open(filepath, 'wb') as file:
+                        filebin = session.get(fileurl, headers=header)
+                        file.write(filebin.content)
+                downloaded_src[fileurl] = filename
+                downloaded_filename.append(filename)
+            
+            # update the tag src to let it point to the downloaded file
             res[inner] = os.path.join(os.path.basename(pagefolder), filename)
+            print("updated tag: ", res)
 
-            header = {
-                'User-Agent':
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0'
-            }
-
-            if not os.path.isfile(filepath):  # was not downloaded
-                with open(filepath, 'wb') as file:
-                    filebin = session.get(fileurl, headers=header)
-                    file.write(filebin.content)
         except Exception as exc:
             print("soupfindnSave(): filename: ",
                   filename,
@@ -76,7 +103,7 @@ def updateLink(soup, url, session):
     update all relative url path in <a> tag in the html to absolute url path
     
     Example:
-    change href="/codegame/index.html" to href="https://www.w3schools.com/codegame/index.html"
+    Update href="/codegame/index.html" to href="https://www.w3schools.com/codegame/index.html"
     """
     for res in soup.findAll('a'):
         try:
@@ -101,7 +128,8 @@ def updateLink(soup, url, session):
 
 def updateSingleLink(hosturl, relativeUrl):
     """
-    update a single url path to absolute url path
+    Update a single url path to absolute url path.
+    This is a helper function of updateLink()
     """
     if relativeUrl.startswith('/'):
         relativeUrl = urljoin(hosturl[:-1], relativeUrl)
@@ -111,43 +139,45 @@ def updateSingleLink(hosturl, relativeUrl):
 def saveFileInStyle(soup, pagefolder, url, session):
     """
     Save the file in embedded css code
+    
     Example:
     <style>
         #bgcodeimg {
             background: #282A35 url("/about/w3codes.png") no-repeat fixed center;
         }
     </style>
-    This func will download the png file and change css url to "page_files/w3codes.png"
+
+    This func will download the png file and change css url to "/pagefolder/w3codes.png"
     
     """
-    def replacer(relativeUrl):
-        relativeUrl = updateSingleLink(url, relativeUrl)
-        return relativeUrl
+    # def replacer(relativeUrl):
+    #     relativeUrl = updateSingleLink(url, relativeUrl)
+    #     return relativeUrl
 
-    cssutils.log.setLevel(logging.CRITICAL)
-    for styles in soup.findAll('style'):
-        try:
-            sheet = cssutils.parseString(styles.encode_contents())
-            cssutils.replaceUrls(sheet, replacer)
-            styles.string.replace_with(sheet.cssText.decode("utf-8"))
-            for fileurl in cssutils.getUrls(sheet):
-                filename = os.path.basename(fileurl)
-                filename = filename.split('?')[0]
-                filepath = os.path.join(pagefolder, filename)
-                if not os.path.isfile(filepath):  # was not downloaded
-                    with open(filepath, 'wb') as file:
-                        filebin = session.get(fileurl)
-                        file.write(filebin.content)
+    # cssutils.log.setLevel(logging.CRITICAL)
+    # for styles in soup.findAll('style'):
+    #     try:
+    #         sheet = cssutils.parseString(styles.encode_contents())
+    #         cssutils.replaceUrls(sheet, replacer)
+    #         styles.string.replace_with(sheet.cssText.decode("utf-8"))
+    #         for fileurl in cssutils.getUrls(sheet):
+    #             filename = os.path.basename(fileurl)
+    #             filename = filename.split('?')[0]
+    #             filepath = os.path.join(pagefolder, filename)
+    #             if not os.path.isfile(filepath):  # was not downloaded
+    #                 with open(filepath, 'wb') as file:
+    #                     filebin = session.get(fileurl)
+    #                     file.write(filebin.content)
 
-            def replacer2(url):
-                url = os.path.join(os.path.basename(pagefolder), filename)
-                return url
+    #         def replacer2(url):
+    #             url = os.path.join(os.path.basename(pagefolder), filename)
+    #             return url
 
-            sheet = cssutils.parseString(styles.encode_contents())
-            cssutils.replaceUrls(sheet, replacer2)
-            styles.string.replace_with(sheet.cssText.decode("utf-8"))
-        except Exception as exc:
-            print("saveFileInStyle(): ", exc, file=sys.stderr)
+    #         sheet = cssutils.parseString(styles.encode_contents())
+    #         cssutils.replaceUrls(sheet, replacer2)
+    #         styles.string.replace_with(sheet.cssText.decode("utf-8"))
+    #     except Exception as exc:
+    #         print("saveFileInStyle(): ", exc, file=sys.stderr)
 
     return soup
 
@@ -168,7 +198,7 @@ def savePage(url, driver, dir_path='pagefolder'):
     save the page
     """
     print("===================")
-    print(f"savePage(url={url},dir_path={dir_path}) start.")
+    print(f"savePage() start.\ntarget url: {url}\ndownload to: {dir_path}")
 
     # load a HTML page (can be dynamic)
     driver.get(url)
@@ -176,10 +206,15 @@ def savePage(url, driver, dir_path='pagefolder'):
 
     # Parse processed webpage with BeautifulSoup
     # print(driver.page_source)
+    print("driver.page_source: ")
+    print(driver.page_source)
     soup = BeautifulSoup(driver.page_source, features="html.parser")
 
     # session used for downloading resource files like images, js and css
     session = requests.Session()
+
+
+    
 
     plaintext_url = re.sub(r'[^a-zA-Z0-9]', '', url)
     if not os.path.exists(dir_path):
@@ -195,7 +230,8 @@ def savePage(url, driver, dir_path='pagefolder'):
             print("find a baseurl:", baseurl)
             url = urljoin(url, baseurl)
             basetag["href"] = "."
-    print("url: ", url)
+        print("<base> tag exists, update url: ", url)
+    
 
     soup = saveFileInTag(soup,
                          assets_path,
@@ -215,14 +251,14 @@ def savePage(url, driver, dir_path='pagefolder'):
                          session,
                          tag2find='script',
                          inner='src')
-    soup = saveFileInStyle(soup, assets_path, url, session)
+    # soup = saveFileInStyle(soup, assets_path, url, session)
     soup = updateLink(soup, url, session)
     soup = addAnnotation(soup, url)
     html_path = dir_path + '/' + re.sub(r'[^a-zA-Z0-9]', '', url) + '.html'
     with open(html_path, 'wb') as file:
         file.write(soup.prettify('utf-8'))
     print(f"savePage({url}) finish.")
-    print("===================")
+    print("======================================\n")
     return soup
 
 
@@ -257,7 +293,8 @@ def BFS(rooturl, driver, dir_path='page', limit=10):
     
     while len(queue_urls) > 0 and count < limit:
         node = queue_urls.pop(0)
-        print("node: ", node)
+        print("pop a node: ", node)
+        print(queue_urls)
         node_soup = savePage(node, driver, dir_path=dir_path)
         count = count + 1
         for neighbour in BFS_get_neighbors(node_soup):

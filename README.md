@@ -32,19 +32,21 @@ $ python scrape.py -h
 
 Save the html file and resource files(img, css, js) of the target web page to local directory
 ```
-$ python scrape.py -u https://www.w3schools.com/
+$ python scrape.py -u https://www.w3schools.com/ 
+$ python scrape.py -u https://www.w3schools.com/spaces/ 
 ```
 
 Save the websites of all urls in the file <code>testlinks.txt</code>
 ```
-$ python scrape.py -l testlinks.txt
+$ python scrape.py -l testlinks.txt 
 ```
 
 Save the web pages of that linked from the root web page (using BFS). It will at most download 5 web pages as specified in the argument.
 ```
-$ python scrape.py -b 5 -u https://www.w3schools.com/
-$ python scrape.py -b 5 -l testlinks.txt
+$ python scrape.py -b 5 -u https://www.w3schools.com/ 
+$ python scrape.py -b 5 -l testlinks.txt 
 ```
+
 
 # Reference
 - https://stackoverflow.com/a/62207356/17381104
