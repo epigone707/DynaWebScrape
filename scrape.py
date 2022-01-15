@@ -42,7 +42,7 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
             
             filename = os.path.basename(unquote(inner_attribute))
             filename = filename.split('?')[0]
-            print("filename: ", filename)
+            # print("filename: ", filename)
             if not filename:
                 continue
             if str(filename) == "":
@@ -50,9 +50,9 @@ def saveFileInTag(soup, pagefolder, url, session, tag2find='img', inner='src'):
                 count = count + 1
             else:
                 filename = f"{str(filename)}"
-            print("filename: ", filename)
+            # print("filename: ", filename)
             fileurl = urljoin(url, res.get(inner))
-            print("fileurl: ", fileurl)
+            # print("fileurl: ", fileurl)
 
             
             if fileurl in downloaded_src:
